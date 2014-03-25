@@ -1,6 +1,6 @@
 https://www.udacity.com/course/cs262
 
-CS262-Udacity-Programming-Languages
+CS262
 ===================================
 String Patterns
 

@@ -52,30 +52,30 @@ accepting2 = [2]
 # over all of the keys in the mapping (i.e., over all of the (state,letter)
 # pairs) -- you'll have to write "edges[edge]" to get the destination list. 
 
-def accepted(visited):
+# def accepted(visited):
 
-    visited_keys_letter_index = []
-    keys = edges.keys()
-    # create list of keys in order visited
-    for i in visited:
-        for n in keys:
-            if n[0] == i:
-                visited_keys_letter_index.append(n[1])
+#     visited_keys_letter_index = []
+#     keys = edges.keys()
+#     # create list of keys in order visited
+#     for i in visited:
+#         for n in keys:
+#             if n[0] == i:
+#                 visited_keys_letter_index.append(n[1])
 
-    print visited_keys_letter_index
-    print """
+#     print visited_keys_letter_index
+#     print """
 
-    """
-    return ''.join(visited_keys_letter_index)
-    # accepted_string = []
-    # for i in visited:
-    #     char = i[1]
-    #     accepted_string.append(char)
-    # return ''.join(accepted_string)
+#     """
+#     return ''.join(visited_keys_letter_index)
+#     # accepted_string = []
+#     # for i in visited:
+#     #     char = i[1]
+#     #     accepted_string.append(char)
+#     # return ''.join(accepted_string)
 
 def nfsmaccepts(current, edges, accepting, visited): 
-        # write your code here 
-
+    if current in accepting:
+        return ''
     visited.append(current)
 
     # access keys in edges, check first index of tuple against current
@@ -102,15 +102,42 @@ def nfsmaccepts(current, edges, accepting, visited):
                     if next_letter: #if this returns something, not None
                         return letter + next_letter
 
+                # returns None if we reach a failure point
+
 # visited is getting fucked up by the dead end states
 # and thus I am returning shitty data at the end
+
+
+# cleaner
+
+def clean(current, edges, accepting, visited):
+    if current in visited:
+        return None
+    elif current in accepting:
+        return ''
+    else:
+        visited.append(current)
+        for edge in edges: # edge is a key in edges
+            if edge[0] == current:
+                for newstate in edges[edge]:
+                    foo = clean(newstate, edges, accepting, visited)
+                    if foo != None: # doesn't work without this...weird falsey, truthy
+                    # I guess it doesn't work here because empty string is falsey. Derp.
+                        return edge[1] + foo
+        # return None # unnecessary
+
+
         
 
 # This problem includes some test cases to help you tell if you are on
 # the right track. You may want to make your own additional tests as well.
-print "Test 1: " + str(nfsmaccepts(1, edges, accepting, []) == "abc") 
-print "Test 2: " + str(nfsmaccepts(1, edges, [4], []) == "ab") 
-print "Test 3: " + str(nfsmaccepts(1, edges2, accepting2, []) == None) 
-print "Test 4: " + str(nfsmaccepts(1, edges2, [1], []) == "")
+# print "Test 1: " + str(nfsmaccepts(1, edges, accepting, []) == "abc") 
+# print "Test 2: " + str(nfsmaccepts(1, edges, [4], []) == "ab") 
+# print "Test 3: " + str(nfsmaccepts(1, edges2, accepting2, []) == None) 
+# print "Test 4: " + str(nfsmaccepts(1, edges2, [1], []) == "")
 
+print "Test 1: " + str(clean(1, edges, accepting, []) == "abc") 
+print "Test 2: " + str(clean(1, edges, [4], []) == "ab") 
+print "Test 3: " + str(clean(1, edges2, accepting2, []) == None) 
+print "Test 4: " + str(clean(1, edges2, [1], []) == "")
 

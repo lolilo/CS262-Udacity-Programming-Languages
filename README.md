@@ -2,20 +2,20 @@ https://www.udacity.com/course/cs262
 
 CS262
 ===================================
-String Patterns
+String Patterns,
 Finding and specifying classes of strings using regular expressions
 
-Lexical Analysis
+Lexical Analysis,
 Breaking strings down into important words
 
-Grammars
+Grammars,
 Specifying and deconstructing valid sentences
 
-Parsing
+Parsing,
 Turning sentences into trees
 
-Interpreting
+Interpreting,
 Simulating programs
 
-Building a Web Browser
+Building a Web Browser,
 Interpreting HTML and JavaScript

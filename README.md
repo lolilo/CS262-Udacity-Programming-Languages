@@ -3,7 +3,6 @@ https://www.udacity.com/course/cs262
 CS262
 ===================================
 String Patterns~
-
 Finding and specifying classes of strings using regular expressions
 
 Lexical Analysis~

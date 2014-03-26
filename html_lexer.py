@@ -10,7 +10,32 @@ tokens = (
     'STRING', # 'hello'
     'WORD') # hello
 
+# lexer states, built-in function of library
+# state of 'htmlcomment' is 'exlusive' -- exclusive is built into libary
+states = (
+    ('htmlcomment', 'exclusive'),
+    )
+
 t_ignore = ' ' # shortcut for whitespace
+
+def t_htmlcomment(token):
+    r'<!--'
+    token.lexer.begin('htmlcomment') # enter htmlcomment state
+
+def t_htmlcomment_end(token):
+    r'-->'
+    print token.value.count('\n') # this doesn't seem to work...
+    token.lexer.lineno += token.value.count('\n') # still need to account for newlines
+    token.lexer.begin("INITIAL") # go back to intial lexer state -- default state
+
+def t_htmlcomment_error(token):
+    token.lexer.skip(1) 
+    # similar to writing pass, but gathers everything in the comment to one value
+
+def t_newline(token):
+    r'\n'
+    token.lexer.lineno += 1
+    pass
 
 def t_LANGLESLASH(token):
     r'</'
@@ -34,10 +59,13 @@ def t_STRING(token):
     return token
 
 def t_WORD(token):
-    r'[^<> ]+'
+    r'[^ <>\n]+'
     return token
 
-webpage = "This is my <b>my</b> webpage!"
+
+webpage = """hello <!-- 
+com
+ment --> all"""
 htmllexer = lex.lex() # tells lexical analysis library to create lexical analyzer
 htmllexer.input(webpage) # output of lexical analyzer is list of tokens
 

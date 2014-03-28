@@ -10,37 +10,6 @@ tokens = (
     'STRING', # 'hello'
     'WORD') # hello
 
-        'ANDAND',       # &&
-        'COMMA',        # ,
-        'DIVIDE',       # /
-        'ELSE',         # else
-        'EQUAL',        # =
-        'EQUALEQUAL',   # ==
-        'FALSE',        # false
-        'FUNCTION',     # function
-        'GE',           # >=
-        'GT',           # >
-#       'IDENTIFIER',   #### Not used in this problem.
-        'IF',           # if
-        'LBRACE',       # {
-        'LE',           # <=
-        'LPAREN',       # (
-            
-        'LT',           # <
-        'MINUS',        # -
-        'NOT',          # !
-#       'NUMBER',       #### Not used in this problem.
-        'OROR',         # ||
-        'PLUS',         # +
-        'RBRACE',       # }
-        'RETURN',       # return
-        'RPAREN',       # )
-        'SEMICOLON',    # ;
-#       'STRING',       #### Not used in this problem. 
-        'TIMES',        # *
-        'TRUE',         # true
-        'VAR',          # var
-
 # lexer states, built-in function of library
 # state of 'htmlcomment' is 'exlusive' -- exclusive is built into libary
 states = (
@@ -48,6 +17,7 @@ states = (
     )
 
 t_ignore = ' ' # shortcut for whitespace
+t_htmlcomment_ignore = ' '
 
 def t_htmlcomment(token):
     r'<!--'
@@ -55,8 +25,11 @@ def t_htmlcomment(token):
 
 def t_htmlcomment_end(token):
     r'-->'
-    print token.value.count('\n') # this doesn't seem to work...
+    # TODO -- fix counting \n while in comment state
+    # print 'token.value.count', token.value.count('\n') # this doesn't seem to work...
+    # print token.lexer.lineno
     token.lexer.lineno += token.value.count('\n') # still need to account for newlines
+    # print token.lexer.lineno
     token.lexer.begin("INITIAL") # go back to intial lexer state -- default state
 
 def t_htmlcomment_error(token):
@@ -65,8 +38,13 @@ def t_htmlcomment_error(token):
 
 def t_newline(token):
     r'\n'
+    # print 'new line!'
     token.lexer.lineno += 1
     pass
+
+def t_error(t):
+        print "JavaScript Lexer: Illegal character " + t.value[0]
+        t.lexer.skip(1)
 
 def t_LANGLESLASH(token):
     r'</'
@@ -96,7 +74,8 @@ def t_WORD(token):
 
 webpage = """hello <!-- 
 com
-ment --> all"""
+ment --> al
+l"""
 htmllexer = lex.lex() # tells lexical analysis library to create lexical analyzer
 htmllexer.input(webpage) # output of lexical analyzer is list of tokens
 

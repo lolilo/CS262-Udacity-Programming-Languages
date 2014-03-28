@@ -81,13 +81,34 @@ def t_eolcomment(t):
     r'//.*'
     pass
 
-# Why is this format so different from the HTML lexer? 
+# Why is this format so different from the HTML lexer?
+
+# For simple tokens, don't have to define the full function. 
+# use
+
+# t_ANDAND = r'&&'
+
+# in place of
+
+# def t_ANDAND(t):  
+#     r'&&'  
+#     return t
+
+# But there is a catch: 
+# when using strings, the precedence of matching is by length of the patern 
+# (longest wins), so when you do
+# t_IF = r'if'
+
+# t_VAR = r'[A-Za-z]+'
+# you are up for unplesant surprise, since VAR will win 
+# and this does not depend on the order they are defined (unlike with def)
+
 t_ANDAND = r'&&'
 t_COMMA = r','
 t_DIVIDE = r'/'
 t_ELSE = r'else'
-t_EQUALEQUAL = r'=='
 t_EQUAL = r'='
+t_EQUALEQUAL = r'=='
 t_FALSE = r'false'
 t_FUNCTION = r'function'
 t_GE = r'>='
@@ -113,72 +134,6 @@ t_VAR = r'var'
 # def t_IDENTIFIER(t):
 #     r'[A-Za-z][A-Z'
 #     t.type = 'ANDAND'
-#     return t
-
-# def t_andand(t):
-#     r'&&'
-#     t.type = 'ANDAND'
-#     return t
-
-# def t_comma(t):
-#     r','
-#     t.type = 'COMMA'
-#     return t
-
-# def t_divide(t):
-#     r'/'
-#     t.type = 'DIVIDE'
-#     return t
-
-# def t_else(t):
-#     r'else'
-#     t.type = 'ELSE'
-#     return t
-
-# # I forsee problems for = and ==.
-# def t_equalequal(t):
-#     r'=='
-#     t.type = 'EQUALEQUAL'
-#     return t
-
-# def t_equal(t):
-#     r'='
-#     t.type = 'EQUAL'
-#     return t
-
-# def t_false(t):
-#     r'false'
-#     t.type = 'FALSE'
-#     return t
-
-# def t_function(t):
-#     r'function'
-#     t.type = 'FUNCTION'
-#     return t
-
-# def t_greater_than_or_equal_to(t):
-#     r'>='
-#     t.type = 'GE'
-#     return t
-
-# def t_greater_than(t):
-#     r'>'
-#     t.type = 'GT'
-#     return t
-
-# def t_if(t):
-#     r'if'
-#     t.type = 'IF'
-#     return t
-
-# def t_lbrace(t):
-#     r'{'
-#     t.type = 'LBRACE'
-#     return t
-
-# def t_le(t):
-#     r'<='
-#     t.type = 'LE'
 #     return t
 
 t_ignore = ' \t\v\r' # whitespace 

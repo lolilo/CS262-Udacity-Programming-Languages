@@ -10,6 +10,37 @@ tokens = (
     'STRING', # 'hello'
     'WORD') # hello
 
+        'ANDAND',       # &&
+        'COMMA',        # ,
+        'DIVIDE',       # /
+        'ELSE',         # else
+        'EQUAL',        # =
+        'EQUALEQUAL',   # ==
+        'FALSE',        # false
+        'FUNCTION',     # function
+        'GE',           # >=
+        'GT',           # >
+#       'IDENTIFIER',   #### Not used in this problem.
+        'IF',           # if
+        'LBRACE',       # {
+        'LE',           # <=
+        'LPAREN',       # (
+            
+        'LT',           # <
+        'MINUS',        # -
+        'NOT',          # !
+#       'NUMBER',       #### Not used in this problem.
+        'OROR',         # ||
+        'PLUS',         # +
+        'RBRACE',       # }
+        'RETURN',       # return
+        'RPAREN',       # )
+        'SEMICOLON',    # ;
+#       'STRING',       #### Not used in this problem. 
+        'TIMES',        # *
+        'TRUE',         # true
+        'VAR',          # var
+
 # lexer states, built-in function of library
 # state of 'htmlcomment' is 'exlusive' -- exclusive is built into libary
 states = (

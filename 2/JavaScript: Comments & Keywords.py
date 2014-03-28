@@ -130,12 +130,6 @@ t_TIMES = r'\*'
 t_TRUE = r'true'
 t_VAR = r'var'
 
-
-# def t_IDENTIFIER(t):
-#     r'[A-Za-z][A-Z'
-#     t.type = 'ANDAND'
-#     return t
-
 t_ignore = ' \t\v\r' # whitespace 
 
 def t_newline(t):

@@ -66,7 +66,30 @@ import ply.lex as lex
 tokens = ('NUM', 'ID')
 
 ####
-# Fill in your code here.
+
+def t_NUM_hex(token):
+  r'0x[0-9a-f]+'
+  # print 'num hex'
+  number = 0
+
+  for char in token.value[2:]:
+    # print 'char before conversion is', char
+    if ord('0') <= ord(char) <= ord('9'):
+      char = float(char)
+    else:
+      char = ord(char) - 87 # skew for hexidecimal output
+    number *= 16
+    number += char
+
+  token.value = number
+  token.type = 'NUM'
+  # print token.value
+  return token
+
+def t_ID(token):
+  r'[a-zA-Z]+'
+  return token
+
 ####
 
 
@@ -111,7 +134,9 @@ print test_lexer(question3) == answer3
 
 
 question4 = "in 0xdeed"
-print test_lexer(question4)
+answer4 = [('ID', 'in'), ('NUM', 57069)]
+print test_lexer(question4) == answer4
 
 question5 = "where is the 0xbeef"
-print test_lexer(question5)
+answer5 = [('ID', 'where'), ('ID', 'is'), ('ID', 'the'), ('NUM', 48879)]
+print test_lexer(question5) == answer5

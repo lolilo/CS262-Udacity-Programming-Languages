@@ -26,10 +26,10 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> exp","S'",1,None,None,None),
-  ('exp -> IDENTIFIER LPAREN optargs RPAREN','exp',4,'p_exp_call','/home/user/src/personal/cs262/4. Parsing/JavaScript_parse_optional_args.py',60),
-  ('exp -> NUMBER','exp',1,'p_exp_number','/home/user/src/personal/cs262/4. Parsing/JavaScript_parse_optional_args.py',64),
-  ('optargs -> args','optargs',1,'p_optargs','/home/user/src/personal/cs262/4. Parsing/JavaScript_parse_optional_args.py',68),
-  ('optargs -> <empty>','optargs',0,'p_optargs_empty','/home/user/src/personal/cs262/4. Parsing/JavaScript_parse_optional_args.py',72),
-  ('args -> exp COMMA args','args',3,'p_args','/home/user/src/personal/cs262/4. Parsing/JavaScript_parse_optional_args.py',76),
-  ('args -> exp','args',1,'p_args_last','/home/user/src/personal/cs262/4. Parsing/JavaScript_parse_optional_args.py',80),
+  ('exp -> IDENTIFIER LPAREN optargs RPAREN','exp',4,'p_exp_call','/home/user/src/personal/cs262/4. Parsing/JavaScript_parse_optional_args.py',57),
+  ('exp -> NUMBER','exp',1,'p_exp_number','/home/user/src/personal/cs262/4. Parsing/JavaScript_parse_optional_args.py',61),
+  ('optargs -> args','optargs',1,'p_optargs','/home/user/src/personal/cs262/4. Parsing/JavaScript_parse_optional_args.py',65),
+  ('optargs -> <empty>','optargs',0,'p_optargsempty','/home/user/src/personal/cs262/4. Parsing/JavaScript_parse_optional_args.py',69),
+  ('args -> exp COMMA args','args',3,'p_args','/home/user/src/personal/cs262/4. Parsing/JavaScript_parse_optional_args.py',73),
+  ('args -> exp','args',1,'p_args_last','/home/user/src/personal/cs262/4. Parsing/JavaScript_parse_optional_args.py',77),
 ]

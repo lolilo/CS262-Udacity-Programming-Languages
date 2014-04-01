@@ -141,7 +141,7 @@ def p_exp_true(p):
     
 def p_exp_false(p):
     'exp : FALSE'
-    p[0] = ('false','true')
+    p[0] = ('false','false')
     
 def p_exp_not(p):
     'exp : NOT exp'
@@ -232,7 +232,7 @@ print test_parser(jstext3) == jstree3
 
 # String and boolean constants, comparisons.
 jstext4 = ' "hello" == "goodbye" || true && false '
-jstree4 = ('binop', ('binop', ('string', 'hello'), '==', ('string', 'goodbye')), '||', ('binop', ('true', 'true'), '&&', ('false', 'true')))
+jstree4 = ('binop', ('binop', ('string', 'hello'), '==', ('string', 'goodbye')), '||', ('binop', ('true', 'true'), '&&', ('false', 'false')))
 print test_parser(jstext4) == jstree4
 
 # Not, precedence, associativity.

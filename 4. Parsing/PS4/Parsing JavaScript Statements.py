@@ -122,7 +122,7 @@ def p_js_empty(p):
 # This can be done in about 50 lines with 15 grammar rules.
 ######################################################################
 
-
+# function declaration
 def p_element_function(p):
   'element : FUNCTION IDENTIFIER LPAREN optparams RPAREN compoundstmt'
   p[0] = ("function", p[2], p[4], p[6])
@@ -143,6 +143,7 @@ def p_params(p):
   'params : IDENTIFIER COMMA params'
   p[0] = [p[1]] + p[3]
 
+# one parameter, or last parameter
 def p_params_one(p):
   'params : IDENTIFIER'
   p[0] = [p[1]]
@@ -150,6 +151,10 @@ def p_params_one(p):
 def p_compound_stmt(p):
   'compoundstmt : LBRACE stmts RBRACE'
   p[0] = p[2]
+
+def p_stmts_empty(p):
+  'stmts : '
+  p[0] = []
 
 def p_stmts(p):
   'stmts : stmt SEMICOLON stmts'
@@ -170,6 +175,20 @@ def p_stmt_assignment(p):
 def p_stmt_return(p):
   'stmt : RETURN exp'
   p[0] = ("return", p[2])
+
+def p_stmt_var(p):
+  'stmt : VAR IDENTIFIER EQUAL exp'
+  p[0] = ("var", p[2], p[4])
+
+def p_stmt_exp(p):
+  'stmt : exp'
+  p[0] = ("exp", p[1])
+
+def p_error(p):
+    if p:
+        print("JavaScript Parser: Illegal input {value} at ({lineno}, {lexpos})".format(value=p.value, lineno=p.lineno, lexpos=p.lexpos))
+    else:
+        print("JavaScript Parser Error")
 
 ######################################################################
 # done
